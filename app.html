@@ -1,0 +1,19 @@
+<html>
+   <body>
+     <h1>Event Assignment Optimizer</h1>
+     <p>Upload a CSV file with practice test data:</p>
+      <form action = "/uploader" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
+      </form>   
+     <p>
+       Requirements:
+       <ul>
+         <li>First row has column headers (name, event 1, event 2, ..., event 6)</li>
+         <li>Every following row has the appropriate data for one member</li>
+         <li>No extraneous rows (additional columns may be okay)</li>
+     </ul>
+     </p>
+   </body>
+</html>
