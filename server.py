@@ -45,7 +45,8 @@ def process_data(file):
     
     # Split dataframe into names and scores
     scores_df = df[event_cols]
-    scores_arr = scores_df.to_numpy()
+	scores_df.fillna(0, inplace=True)
+    scores_arr = scores_df.to_numpy().astype(int)
     
     names = df[name_col]
     
