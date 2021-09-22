@@ -60,12 +60,14 @@ def findBestAssignment(scores: np.array):
                                             dp[i][p+1][e1+ev[0]][e2+ev[1]][e3+ev[2]][e4+ev[3]][e5+ev[4]][e6+ev[5]] = \
                                                 max(newPts,
                                                     dp[i-1][p+1][e1+ev[0]][e2+ev[1]][e3+ev[2]][e4+ev[3]][e5+ev[4]][e6+ev[5]],
-                                                    dp[i-1][p][e1+ev[0]][e2+ev[1]][e3+ev[2]][e4+ev[3]][e5+ev[4]][e6+ev[5]]);
+                                                    dp[i-1][ p ][e1+ev[0]][e2+ev[1]][e3+ev[2]][e4+ev[3]][e5+ev[4]][e6+ev[5]]);
                                             if newPts > bestScore:
                                                 bestScore = newPts;
+                                                print(str(maxE) + " " + str(e6))
                                                 print(f"{i}[{p}]{ev} --> {e1+ev[0]}/{e2+ev[1]}/{e3+ev[2]}/{e4+ev[3]}/{e5+ev[4]}/{e6+ev[5]} --> {newPts}");
 
-            for j in range(6):
-                maxE[j] = min(6, maxE[j]+ev[j])
+            if ss == 0b111:
+                for j in range(6):
+                    maxE[j] = min(6, maxE[j]+ev[j])
 
     return {'best_score': bestScore, 'best_team': []}
