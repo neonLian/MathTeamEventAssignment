@@ -19,7 +19,7 @@ def upload_file():
 		output = process_data(f)
 
 		if output['success']:
-			return 'Best team: ' + str(output['best_score'])
+			return '<p>Best team: <b>' + str(output['best_score']) + '</b><p>Team: ' + str(output['best_team']) + '</p>'
 		else:
 			return 'Failed: ' + output['reason']
 
@@ -54,7 +54,11 @@ def process_data(file):
 	solverResult = findBestAssignment(scores_arr)
 	output['success'] = True
 	output['best_score'] = solverResult['best_score']
-	output['best_team'] = solverResult['best_team']
+	solvedTeam = solverResult['best_team']
+	formattedTeam = []
+	for entry in solvedTeam:
+		formattedTeam.append([names[entry[0]], entry[1]])
+	output['best_team'] = formattedTeam
 	output['df'] = df
 	return output
 
