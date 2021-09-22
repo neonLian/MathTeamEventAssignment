@@ -54,7 +54,7 @@ def findBestAssignment(scores: np.array):
                                                     break;
                                             if invalidEvents:
                                                 break;
-                                                
+
                                             newPts = dp[i-1][p][e1][e2][e3][e4][e5][e6] + curPoints;
 
                                             dp[i][p+1][e1+ev[0]][e2+ev[1]][e3+ev[2]][e4+ev[3]][e5+ev[4]][e6+ev[5]] = \
@@ -68,4 +68,4 @@ def findBestAssignment(scores: np.array):
             for j in range(6):
                 maxE[j] = min(6, maxE[j]+ev[j])
 
-    return bestScore
+    return {'best_score': bestScore, 'best_team': []}
