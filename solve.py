@@ -94,7 +94,9 @@ def findBestAssignment(scores: np.array):
 
                                             # Traceback to identify which people were added and with what events
 
-                                            if bestDPStatePts == newPts:
+                                            if bestDPStatePts == 0:
+                                                prev[i][p+1][eventIndexWithAdded] = [0, 0]
+                                            elif bestDPStatePts == newPts:
                                                 prev[i][p+1][eventIndexWithAdded] = [1, ss]
                                             elif bestDPStatePts == curDPStatePts:
                                                 pass

@@ -3,15 +3,16 @@ import numpy as np
 import pandas as pd
 from solve import findBestAssignment
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 #from werkzeug import secure_filename
 app = Flask(__name__)
+
 
 @app.route('/')
 def upload_html():
 	return render_template('app.html')
 
-@app.route('/uploader', methods = ['GET', 'POST'])
+@app.route('/results', methods = ['GET', 'POST'])
 def upload_file():
 	if request.method == 'POST':
 		f = request.files['file']
@@ -19,9 +20,16 @@ def upload_file():
 		output = process_data(f)
 
 		if output['success']:
-			return '<p>Best team: <b>' + str(output['best_score']) + '</b><p>Team: ' + str(output['best_team']) + '</p>'
+			#return '<p>Best team: <b>' + str(output['best_score']) + '</b><p>Team: ' + str(output['best_team']) + '</p>'
+			return render_template('report.html',
+									best_score=output['best_score'],
+									best_team=output['best_team'])
 		else:
 			return 'Failed: ' + output['reason']
+
+@app.route('/css/<path:path>')
+def serve_css(path):
+	return send_from_directory('css', path)
 
 def process_data(file):
 

@@ -1,0 +1,32 @@
+body {
+    background-color: #0693e5;
+    width: 100%;
+}
+.main-section {
+    font-family: Calibri, sans-serif;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    /*width: 40em;*/
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    }
+.main-header {
+    text-align: center;
+    margin-bottom: 1em;
+}
+.gray-box {
+    background-color: #bbbbbb;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.about {
+    text-align: center;
+    margin: 1em;
+    color: #09005e;
+    font-size: 10px;
+}
