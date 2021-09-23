@@ -1,19 +1,69 @@
 <html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    
+   	<style>
+    body {
+    	background-color: #0693e5;
+        width: 100%;
+    }
+    .main-section {
+    	font-family: Calibri, sans-serif;
+    	padding: 30px;
+        background-color: #ffffff;
+        border-radius: 25px;
+        /*width: 40em;*/
+        margin-top: 2em;
+        margin-left: auto;
+        margin-right: auto;
+        }
+    .main-header {
+    	text-align: center;
+        margin-bottom: 1em;
+    }
+    .requirements {
+    	background-color: #bbbbbb;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    
+    </style>
+    </head>
    <body>
-     <h1>Event Assignment Optimizer</h1>
-     <p>Upload a CSV file with practice test data:</p>
-      <form action = "/uploader" method = "POST" 
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
-      </form>   
+   	<div class="main-section container">
+     <h1 class="main-header">Event Assignment Optimizer</h1>
+     <div class="info">
+     	<p>This tool will take practice test data and find the best possible team that can be formed based on the following criteria:
+        <ul>
+        	<li>Up to 10 members can be selected total.</li>
+            <li>Each event can have at most 5 members competing in it.</li>
+        </ul>
+        The program may suggest that a member do an event they did not practice for, but it assumes that they would score 0 points on any events they did not practice for.
+        </p>
+     </div>
+     <div class="requirements">
      <p>
        Requirements:
        <ul>
          <li>First row has column headers (name, event 1, event 2, ..., event 6)</li>
          <li>Every following row has the appropriate data for one member</li>
          <li>No extraneous rows (additional columns may be okay)</li>
+   		 <li>The program currently only supports up to 3 scores as input per member.</li>
      </ul>
      </p>
+     </div>
+     <div class="submission">
+     <p>Upload a CSV file with practice test data:</p>
+      <form action = "/uploader" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
+      </form>
+      <p>The results should appear in under a minute.</p>
+      </div>
+     </div>
    </body>
 </html>

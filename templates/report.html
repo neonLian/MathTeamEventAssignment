@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Math Team Event Assigner</title>
+  </head>
+  <body>
+    <h1>Math Team Event Assigner</h1>
+    <h2>Results</h2>
+    
+    <p>Best possible score: <strong>{{best_score}}</strong></p>
+    
+    <p>
+      Members and events for optimal team:
+      <ul>
+      {% for entry in best_team %}
+        <li>{{entry[0]}}: {{entry[1]}}</li>
+      {% endfor %}
+      </ul>
+    </p>
+  
+    <p>
+      Event counts:
+      <table>
+        <tr></tr>
+        <tr></tr>
+    </p>
+  
+    <p>
+      Note: this is one assignment of members to reach the optimal number of points, but there may be other possible assignments that score the same amount of points.
+      If a member has a 0 in their event list, that means that they can be assigned to any event with free slots remaining (and are not expected to score any points for those events).
+    </p>
+  </body>
+</html>
