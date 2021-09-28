@@ -5,14 +5,15 @@ def ss3_to_arr6(ss: int, events, i) -> List[int]:
     ev = [0]*6; # Length 6 array indicating 0 or 1 for each event
     for e in range(3):
         if (ss & (1 << e)):
-            ev[events[i][e]] = 1
+            if events[i][e] >= 0:
+                ev[events[i][e]] = 1
     return ev
 
 def ss3_to_ev3(ss: int, events, i) -> List[int]:
     out = []
     for e in range(3):
         try:
-            if (ss & (1 << e)):
+            if (ss & (1 << e)) and events[i][e] >= 0:
                 out.append(events[i][e]+1)
         except TypeError:
             print("ERROR!")
@@ -45,6 +46,7 @@ def findBestAssignment(scores: np.array):
     maxE = [1,1,1,1,1,1]
     for i in range(n):
         print("Processing person " + str(i))
+        processedSubsets = []
         for ss in range(2**3):
             ## NOTE: Handle cases where ss = 0? Or no event scores?
 
@@ -52,8 +54,14 @@ def findBestAssignment(scores: np.array):
             ev = ss3_to_arr6(ss, events, i); # Length 6 array indicating 0 or 1 for each event
             curPoints = 0
             for e in range(6):
-                if ev[e]:
+                if ev[e] and scores[i][e] == 0:
+                    ev[e] = 0;
+                elif ev[e]:
                     curPoints += scores[i][e]
+            print(str(i) + " " + str(bin(ss)) + " " + str(ev) + " " + str(curPoints))
+            #if curPoints == 0 or ev in processedSubsets:
+            #    continue;
+            processedSubsets.append(ev)
 
             # Base case
             if i == 0:
@@ -112,10 +120,14 @@ def findBestAssignment(scores: np.array):
             if ss == 0b111:
                 for j in range(6):
                     maxE[j] = min(6, maxE[j]+ev[j])
+        processedSubsets = []
 
     # Perform the traceback
+
+    ## NOTE: Traceback appears to fail when person does not get all events they scored points on
     curIdx = bestScoreIndex
     bestTeam = []
+    eventCounts = np.zeros((6), dtype=int);
     while (curIdx[0] >= 0):
         print(str(curIdx) + " " + str(prev[tuple(curIdx)]))
         if prev[tuple(curIdx)][0] == 1:
@@ -123,8 +135,10 @@ def findBestAssignment(scores: np.array):
             print(f"Person {person} added")
             ss3 = prev[tuple(curIdx)][1]
             bestTeam.append( (person, ss3_to_ev3(ss3, events, person)) )
+            print(bestTeam)
             ev = ss3_to_arr6(ss3, events, person)
+            eventCounts += ev;
             curIdx = (curIdx[0] - 1, curIdx[1] - 1) + tuple([curIdx[2+i] - ev[i] for i in range(6)])
         else:
             curIdx = (curIdx[0] - 1,) + tuple(curIdx[1:])
-    return {'best_score': bestScore, 'best_team': bestTeam}
+    return {'best_score': bestScore, 'best_team': bestTeam, 'event_counts': list(eventCounts)}

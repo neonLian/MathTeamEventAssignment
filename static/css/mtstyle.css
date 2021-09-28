@@ -30,3 +30,29 @@ body {
     color: #09005e;
     font-size: 10px;
 }
+
+.home_button {
+    align: center;
+}
+
+.event-counts th, .event-counts td {
+    border-collapse: collapse;
+    border: 1px solid black;
+    background-color: #d6f9e9;
+}
+
+.red {
+    color: #ff0000;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+@media print
+{
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

@@ -1,56 +1,57 @@
 <html>
-  <head>
+<head>
     <title>Event Assignment Optimizer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
-   	<link rel="stylesheet" href="css/mtstyle.css">
-  </head>
-  <body>
-      <div class="main-section container">
-        <h1>Event Assignment Optimizer</h1>
+    <link rel="stylesheet" href="/static/css/mtstyle.css">
+</head>
+<body>
+    <div class="main-section container">
+        <h1 class="main-header">Event Assignment Optimizer</h1>
         <h2>Results</h2>
 
         <p>Best possible score: <strong>{{best_score}}</strong></p>
 
         <p>
-          Members and events for optimal team:
-          <ul>
-          {% for entry in best_team %}
-            <li>{{entry[0]}}: {{entry[1]}}</li>
-          {% endfor %}
-          </ul>
+            Members and events for optimal team:
+            <ul>
+                {% for entry in best_team %}
+                <li>{{entry[0]}}: {{entry[1]}}</li>
+                {% endfor %}
+            </ul>
         </p>
 
         <p>
-          Event counts:
-          <table>
-            <tr>
-                <td>Event 1</td>
-                <td>Event 2</td>
-                <td>Event 3</td>
-                <td>Event 4</td>
-                <td>Event 5</td>
-                <td>Event 6</td>
-            </tr>
-            <tr>
-                <td>~</td>
-                <td>~</td>
-                <td>~</td>
-                <td>~</td>
-                <td>~</td>
-                <td>~</td>
-            </tr>
-        </table>
+            Event counts:
+            <table class="event-counts">
+                <tr>
+                    <td>Event 1</td>
+                    <td>Event 2</td>
+                    <td>Event 3</td>
+                    <td>Event 4</td>
+                    <td>Event 5</td>
+                    <td>Event 6</td>
+                </tr>
+                <tr>
+                    {% for i in range(6) %}
+                    <td>{{event_counts[i]}}</td>
+                    {% endfor %}
+                </tr>
+            </table>
         </p>
 
         <p>
-          Note: this is one assignment of members to reach the optimal number of points, but there may be other possible assignments that score the same amount of points.
-          If a member has a 0 in their event list, that means that they can be assigned to any event with free slots remaining (and are not expected to score any points for those events).
+            Note: this is one assignment of members to reach the optimal number of points, but there may be other possible assignments that score the same amount of points.
+            If a member doesn't have all 3 events in their event list, that means that they can be assigned to any event with free slots remaining (and are not expected to score any points for those events).
         </p>
+
+        <p><button class="print_button no-print" onclick="window.print();return false;">Print results</button></p>
+
+        <p><a href="/"><button class="home_button no-print">Return to home</button></a></p>
     </div>
     <div class="about">
         Created by Lian
     </div>
-  </body>
-</html>
+    </body>
+    </html>
